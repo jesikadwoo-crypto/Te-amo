@@ -357,7 +357,116 @@
       box-shadow: 0 8px 22px rgba(35, 104, 119, .13);
     }
 
+    .song-note {
+      margin: 24px auto 0;
+      color: var(--accent-dark);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
     .music-player iframe { width: 100%; height: 100%; display: block; border: 0; }
+
+    .welcome-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: rgba(35, 65, 72, .56);
+      backdrop-filter: blur(6px);
+    }
+
+    .welcome-menu[hidden] { display: none; }
+
+    .welcome-panel {
+      width: min(92vw, 470px);
+      max-height: min(88vh, 720px);
+      overflow-y: auto;
+      padding: clamp(20px, 4vw, 30px);
+      color: var(--ink);
+      background: #fbfefe;
+      border: 1px solid #c6e6eb;
+      border-radius: 28px;
+      box-shadow: 0 24px 70px rgba(35, 85, 95, .25);
+      text-align: center;
+    }
+
+    .menu-heart {
+      display: grid;
+      width: 54px;
+      height: 54px;
+      place-items: center;
+      margin: 0 auto 9px;
+      color: #fff;
+      background: linear-gradient(145deg, #39aec2, #006f89);
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 144, 174, .22);
+      font-size: 1.9rem;
+      transform: rotate(-6deg);
+    }
+
+    .menu-characters {
+      width: min(100%, 190px);
+      height: 112px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin: 0 auto 14px;
+      background: linear-gradient(145deg, #eaf7f9, #f7fcfc);
+      border: 1px solid #c6e6eb;
+      border-radius: 22px;
+    }
+
+    .menu-characters img {
+      width: 100%;
+      height: 100%;
+      display: none;
+      object-fit: contain;
+    }
+
+    .characters-placeholder {
+      color: var(--accent-dark);
+      font-size: 2.6rem;
+      line-height: 1.1;
+    }
+
+    .characters-placeholder span { display: block; font-size: .78rem; font-weight: 700; }
+
+    .welcome-panel h2 {
+      margin: 0;
+      color: #29444b;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 7vw, 2.35rem);
+    }
+
+    .welcome-panel > p { margin: 8px 0 14px; color: #607982; line-height: 1.55; }
+
+    .menu-choices { display: flex; justify-content: center; gap: 12px; margin-top: 22px; }
+
+    .menu-choice {
+      min-width: 112px;
+      margin: 0;
+      padding: 12px 20px;
+    }
+
+    .menu-choice-no {
+      color: var(--accent-dark);
+      background: #eaf7f9;
+      border: 1px solid #c6e6eb;
+      box-shadow: none;
+    }
+
+    .menu-choice-no:hover { background: #d8f0f4; box-shadow: 0 8px 16px rgba(0, 144, 174, .14); }
+
+    .menu-response {
+      min-height: 1.5em;
+      margin: 14px 0 0 !important;
+      color: var(--accent-dark) !important;
+      font-weight: 700;
+    }
 
     .envelope-icon {
       width: 67px;
@@ -446,6 +555,23 @@
     <span style="--x:92%;--size:22px;--time:19s;--delay:-11s">♡</span>
   </div>
 
+  <section class="welcome-menu" id="welcome-menu" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <div class="welcome-panel">
+      <div class="menu-characters">
+        <img id="menu-characters-image" src="cinnamoroll-pompompurin.png.jpg" alt="Cinnamoroll y Pompompurin juntos" />
+        <div class="characters-placeholder" id="characters-placeholder" aria-hidden="true">☁️ 🐶 🍮<span>Cinnamoroll + Pompompurin</span></div>
+      </div>
+      <div class="menu-heart" aria-hidden="true">♡</div>
+      <h2 id="welcome-title">¿Quieres ver tu regalito?</h2>
+      <p>Preparé algo muy especial para ti 💌</p>
+      <div class="menu-choices">
+        <button type="button" class="menu-choice" id="menu-yes">Sí 💝</button>
+        <button type="button" class="menu-choice menu-choice-no" id="menu-no">No 🙈</button>
+      </div>
+      <p class="menu-response" id="menu-response" aria-live="polite"></p>
+    </div>
+  </section>
+
   <main class="card">
     <div class="badge">✦ Hoy es tu día ✦</div>
     <div class="heart" aria-hidden="true">♡</div>
@@ -485,7 +611,8 @@
       <p>Sigue siendo buen esposito 🥰 te amo demasiadoooooooo con mi cuerpo, alma, mente y corazón 🥰🥰 te amo demasiadoooooooo mucho muchooo hasta el infinito 💕</p>
       <button type="button" class="dialog-close letter-close" id="close-letter">Cerrar cartita 💗</button>
     </dialog>
-    <div class="music-player">
+    <p class="song-note">Recuerda la letra de esta canción, porque sigo sintiendo lo mismo...</p>
+    <div class="music-player" id="music-player">
       <iframe
         src="https://open.spotify.com/embed/track/1jecO8NeYLsVWVptITz4c1?utm_source=generator"
         title="Maye - Tú en Spotify"
@@ -536,8 +663,34 @@
     document.getElementById('open-letter').addEventListener('click', () => letterDialog.showModal());
     document.getElementById('close-letter').addEventListener('click', () => letterDialog.close());
 
+    const welcomeMenu = document.getElementById('welcome-menu');
+    document.getElementById('menu-yes').addEventListener('click', () => {
+      welcomeMenu.hidden = true;
+    });
+
+    document.getElementById('menu-no').addEventListener('click', () => {
+      document.getElementById('menu-response').textContent = '¿Segurito? Hay una sorpresa linda esperándote 💙';
+    });
+
     const couplePhoto = document.getElementById('couple-photo');
     const photoPlaceholder = document.getElementById('photo-placeholder');
+    const menuCharactersImage = document.getElementById('menu-characters-image');
+    const charactersPlaceholder = document.getElementById('characters-placeholder');
+
+    menuCharactersImage.addEventListener('load', () => {
+      menuCharactersImage.style.display = 'block';
+      charactersPlaceholder.style.display = 'none';
+    });
+
+    menuCharactersImage.addEventListener('error', () => {
+      menuCharactersImage.style.display = 'none';
+      charactersPlaceholder.style.display = 'block';
+    });
+
+    if (menuCharactersImage.complete && menuCharactersImage.naturalWidth > 0) {
+      menuCharactersImage.style.display = 'block';
+      charactersPlaceholder.style.display = 'none';
+    }
 
     couplePhoto.addEventListener('load', () => {
       couplePhoto.style.display = 'block';
