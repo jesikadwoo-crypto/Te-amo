@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff4f5" />
+  <meta name="theme-color" content="#eaf7f9" />
   <title>Feliz día del novio 💌</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -11,9 +11,9 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #513a48;
-      --pink: #e6819a;
-      --deep-pink: #c95778;
+      --ink: #29444b;
+      --accent: #0090AE;
+      --accent-dark: #006b82;
       --cream: #fffaf5;
     }
 
@@ -28,9 +28,9 @@
       padding: 32px 18px;
       color: var(--ink);
       background:
-        radial-gradient(ellipse at 12% 15%, #ffe3e9 0, transparent 28%),
-        radial-gradient(ellipse at 88% 85%, #ffe8d9 0, transparent 29%),
-        #fff8f6;
+        radial-gradient(ellipse at 12% 15%, #d9f1f4 0, transparent 28%),
+        radial-gradient(ellipse at 88% 85%, #e4f5f4 0, transparent 29%),
+        #f7fcfc;
       font-family: 'DM Sans', sans-serif;
     }
 
@@ -64,7 +64,7 @@
       background: rgba(255, 255, 255, .82);
       border: 1px solid rgba(255, 255, 255, .95);
       border-radius: 30px;
-      box-shadow: 0 24px 70px rgba(139, 76, 94, .13), 0 4px 15px rgba(139, 76, 94, .06);
+      box-shadow: 0 24px 70px rgba(35, 104, 119, .13), 0 4px 15px rgba(35, 104, 119, .06);
       backdrop-filter: blur(12px);
       animation: appear .8s cubic-bezier(.2,.8,.2,1) both;
     }
@@ -79,8 +79,8 @@
       align-items: center;
       gap: 8px;
       padding: 9px 15px;
-      color: var(--deep-pink);
-      background: #fff0f3;
+      color: var(--accent-dark);
+      background: #e5f6f8;
       border-radius: 99px;
       font-size: .78rem;
       font-weight: 700;
@@ -95,9 +95,9 @@
       place-items: center;
       margin: 27px auto 17px;
       color: #fff;
-      background: linear-gradient(145deg, #f5a4b5, #df6c8a);
+      background: linear-gradient(145deg, #39aec2, #006f89);
       border-radius: 28px;
-      box-shadow: 0 12px 24px rgba(223, 108, 138, .25);
+      box-shadow: 0 12px 24px rgba(0, 144, 174, .25);
       font-size: 43px;
       transform: rotate(-7deg);
       animation: pulse 2.2s ease-in-out infinite;
@@ -109,7 +109,7 @@
 
     h1 {
       margin: 0;
-      color: #593e4d;
+      color: #29444b;
       font-family: 'Playfair Display', Georgia, serif;
       font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 700;
@@ -117,7 +117,7 @@
       line-height: 1.08;
     }
 
-    h1 span { color: var(--pink); }
+    h1 span { color: var(--accent); }
 
     .photo-frame {
       width: min(100%, 300px);
@@ -127,10 +127,10 @@
       position: relative;
       overflow: hidden;
       margin: 23px auto 0;
-      background: linear-gradient(135deg, #fff1f3, #fff8ee);
+      background: linear-gradient(135deg, #e8f7f9, #f1faf8);
       border: 5px solid #fff;
       border-radius: 22px;
-      box-shadow: 0 8px 22px rgba(139, 76, 94, .12);
+      box-shadow: 0 8px 22px rgba(35, 104, 119, .12);
     }
 
     .photo-frame img {
@@ -142,7 +142,7 @@
 
     .photo-placeholder {
       padding: 16px;
-      color: #a17c8a;
+      color: #63818a;
       font-size: .9rem;
       line-height: 1.6;
     }
@@ -156,7 +156,7 @@
     .intro {
       max-width: 370px;
       margin: 20px auto 0;
-      color: #826f79;
+      color: #607982;
       font-size: 1.05rem;
       line-height: 1.75;
     }
@@ -166,28 +166,28 @@
       align-items: center;
       gap: 13px;
       margin: 25px 0;
-      color: #e5a0ad;
+      color: #4da9ba;
     }
 
     .divider::before, .divider::after {
       height: 1px;
       flex: 1;
       content: '';
-      background: #f3dce0;
+      background: #cce8ec;
     }
 
     .note {
       min-height: 78px;
       padding: 17px 19px;
-      color: #755b67;
-      background: #fff8f5;
-      border: 1px dashed #f0c9d0;
+      color: #526d75;
+      background: #f2fafb;
+      border: 1px dashed #a8d8e0;
       border-radius: 16px;
       font-size: .96rem;
       line-height: 1.65;
     }
 
-    .note strong { color: var(--deep-pink); }
+    .note strong { color: var(--accent-dark); }
 
     button {
       margin-top: 24px;
@@ -195,25 +195,25 @@
       border: 0;
       border-radius: 99px;
       color: #fff;
-      background: linear-gradient(135deg, #e98ca2, #d76886);
-      box-shadow: 0 9px 18px rgba(215, 104, 134, .23);
+      background: linear-gradient(135deg, #159bb4, #006b82);
+      box-shadow: 0 9px 18px rgba(0, 144, 174, .23);
       cursor: pointer;
       font: inherit;
       font-weight: 700;
       transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    button:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(215, 104, 134, .3); }
+    button:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(0, 144, 174, .3); }
     button:active { transform: translateY(0); }
-    button:focus-visible { outline: 3px solid #f1b1c0; outline-offset: 4px; }
+    button:focus-visible { outline: 3px solid #70c5d3; outline-offset: 4px; }
 
     .signature {
       margin: 25px 0 0;
-      color: #a18c95;
+      color: #718990;
       font-size: .86rem;
     }
 
-    .signature span { color: var(--pink); }
+    .signature span { color: var(--accent); }
 
     .gift-coupon {
       position: relative;
@@ -221,11 +221,11 @@
       width: min(100%, 310px);
       margin: 18px auto 0;
       padding: 14px 18px;
-      color: #a74462;
-      background: #fff0f3;
-      border: 2px dashed #e99caf;
+      color: #006b82;
+      background: #e5f6f8;
+      border: 2px dashed #49aabd;
       border-radius: 12px;
-      box-shadow: 0 5px 14px rgba(215, 104, 134, .12);
+      box-shadow: 0 5px 14px rgba(0, 144, 174, .12);
       cursor: pointer;
       font: inherit;
       font-size: .92rem;
@@ -241,45 +241,45 @@
       width: 16px;
       height: 16px;
       content: '';
-      background: #fffdfb;
+      background: #f7fcfc;
       border-radius: 50%;
       transform: translateY(-50%);
     }
 
     .gift-coupon::before { left: -9px; }
     .gift-coupon::after { right: -9px; }
-    .gift-coupon:hover { transform: translateY(-2px) rotate(-1deg); background: #ffe8ed; }
-    .gift-coupon:focus-visible { outline: 3px solid #f1b1c0; outline-offset: 4px; }
+    .gift-coupon:hover { transform: translateY(-2px) rotate(-1deg); background: #d7f0f4; }
+    .gift-coupon:focus-visible { outline: 3px solid #70c5d3; outline-offset: 4px; }
 
     .gift-dialog {
       width: min(92vw, 430px);
       padding: 30px 24px 25px;
       color: var(--ink);
-      background: #fffaf8;
-      border: 1px solid #f7dce2;
+      background: #fbfefe;
+      border: 1px solid #c6e6eb;
       border-radius: 24px;
-      box-shadow: 0 24px 70px rgba(83, 47, 63, .25);
+      box-shadow: 0 24px 70px rgba(35, 85, 95, .25);
       text-align: center;
     }
 
-    .gift-dialog::backdrop { background: rgba(76, 48, 61, .42); backdrop-filter: blur(4px); }
+    .gift-dialog::backdrop { background: rgba(35, 65, 72, .42); backdrop-filter: blur(4px); }
 
     .gift-dialog h2 {
       margin: 2px 0 8px;
-      color: #593e4d;
+      color: #29444b;
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.8rem;
     }
 
-    .gift-dialog > p { margin: 0 0 20px; color: #826f79; }
+    .gift-dialog > p { margin: 0 0 20px; color: #607982; }
 
     .gift-options { display: grid; gap: 10px; }
 
     .gift-option {
       padding: 13px 15px;
-      color: #755260;
-      background: #fff0f3;
-      border: 1px solid #f4d4dc;
+      color: #45656e;
+      background: #eaf7f9;
+      border: 1px solid #c6e6eb;
       border-radius: 14px;
       cursor: pointer;
       font: inherit;
@@ -288,20 +288,20 @@
       transition: transform .18s ease, background .18s ease;
     }
 
-    .gift-option:hover { transform: translateY(-1px); background: #ffe5eb; }
-    .gift-option:focus-visible, .dialog-close:focus-visible { outline: 3px solid #f1b1c0; outline-offset: 3px; }
+    .gift-option:hover { transform: translateY(-1px); background: #d8f0f4; }
+    .gift-option:focus-visible, .dialog-close:focus-visible { outline: 3px solid #70c5d3; outline-offset: 3px; }
 
     .gift-choice-message {
       min-height: 1.5em;
       margin: 15px 0 0 !important;
-      color: var(--deep-pink) !important;
+      color: var(--accent-dark) !important;
       font-weight: 700;
     }
 
     .dialog-close {
       margin-top: 10px;
       padding: 9px 16px;
-      color: #826f79;
+      color: #607982;
       background: transparent;
       border: 0;
       border-radius: 99px;
@@ -319,16 +319,16 @@
       gap: 5px;
       margin: 18px auto 0;
       padding: 12px;
-      color: #a74462;
-      background: linear-gradient(155deg, #fff9f7, #ffeaf0);
-      border: 2px solid #efc4cf;
+      color: #006b82;
+      background: linear-gradient(155deg, #f4fbfb, #dff3f6);
+      border: 2px solid #8dcbd6;
       border-radius: 16px 16px 13px 13px;
-      box-shadow: 0 7px 16px rgba(215, 104, 134, .16);
+      box-shadow: 0 7px 16px rgba(0, 144, 174, .16);
       font-size: .88rem;
       transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .letter-button:hover { transform: translateY(-3px) rotate(-2deg); box-shadow: 0 11px 20px rgba(215, 104, 134, .23); }
+    .letter-button:hover { transform: translateY(-3px) rotate(-2deg); box-shadow: 0 11px 20px rgba(0, 144, 174, .23); }
 
     .card > #surprise-button,
     .card > .gift-coupon,
@@ -351,10 +351,10 @@
       height: 152px;
       overflow: hidden;
       margin: 22px auto 0;
-      background: #f8dfe5;
+      background: #e1f2f5;
       border: 0;
       border-radius: 18px;
-      box-shadow: 0 8px 22px rgba(139, 76, 94, .13);
+      box-shadow: 0 8px 22px rgba(35, 104, 119, .13);
     }
 
     .music-player iframe { width: 100%; height: 100%; display: block; border: 0; }
@@ -366,9 +366,9 @@
       place-items: center;
       position: relative;
       overflow: hidden;
-      color: #c95778;
-      background: #ffdfe7;
-      border: 1px solid #e99caf;
+      color: #006b82;
+      background: #ccecf1;
+      border: 1px solid #69b9c8;
       border-radius: 7px;
       font-size: 1.35rem;
     }
@@ -378,7 +378,7 @@
       inset: 0 0 auto;
       height: 55%;
       content: '';
-      background: #f6c5d0;
+      background: #8ecbd6;
       clip-path: polygon(0 0, 100% 0, 50% 100%);
     }
 
@@ -393,19 +393,19 @@
       max-height: min(82vh, 720px);
       overflow-y: auto;
       padding: clamp(24px, 6vw, 38px);
-      color: #755b67;
-      background: #fffaf8;
-      border: 1px solid #f7dce2;
+      color: #526d75;
+      background: #fbfefe;
+      border: 1px solid #c6e6eb;
       border-radius: 24px;
-      box-shadow: 0 24px 70px rgba(83, 47, 63, .25);
+      box-shadow: 0 24px 70px rgba(35, 85, 95, .25);
       line-height: 1.8;
     }
 
-    .letter-dialog::backdrop { background: rgba(76, 48, 61, .48); backdrop-filter: blur(4px); }
+    .letter-dialog::backdrop { background: rgba(35, 65, 72, .48); backdrop-filter: blur(4px); }
 
     .letter-dialog h2 {
       margin: 0 0 18px;
-      color: #593e4d;
+      color: #29444b;
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.9rem;
       text-align: center;
