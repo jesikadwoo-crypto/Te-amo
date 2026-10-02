@@ -355,7 +355,8 @@
 
     .card > #surprise-button,
     .card > .gift-coupon,
-    .card > .letter-button {
+    .card > .letter-button,
+    .card > .reasons-button {
       width: min(100%, 310px);
       display: flex;
       align-items: center;
@@ -365,7 +366,8 @@
     }
 
     .card > #surprise-button,
-    .card > .gift-coupon { min-height: 54px; }
+    .card > .gift-coupon,
+    .card > .reasons-button { min-height: 54px; }
 
     .card > .letter-button { min-height: 126px; }
 
@@ -602,6 +604,15 @@
 
     .letter-dialog p { margin: 0 0 15px; }
 
+    .reasons-list {
+      margin: 0;
+      padding-left: 1.5em;
+      text-align: left;
+    }
+
+    .reasons-list li { margin-bottom: 9px; padding-left: 5px; }
+    .reasons-list li::marker { color: var(--accent-dark); font-weight: 700; }
+
     .letter-dialog .letter-close {
       display: block;
       margin: 20px auto 0;
@@ -682,6 +693,7 @@
       <span class="envelope-icon" aria-hidden="true"><span>♥</span></span>
       <span>Abrir mi cartita 💌</span>
     </button>
+    <button type="button" class="reasons-button" id="open-reasons">10 razones por las que eres el mejor novio del mundo 💙</button>
     <dialog class="gift-dialog" id="gift-dialog" aria-labelledby="gift-dialog-title">
       <h2 id="gift-dialog-title">Escoge tu regalito 💝</h2>
       <p>Elige el que más te guste:</p>
@@ -700,6 +712,22 @@
       <p>Quiero hacerte muy muy feliz cada día que estemos juntos 🥰 quiero sacarte una linda sonrisa como lo es la tuya, quiero volar entre tus brazos y sentirme protegida por siempre 🥺.</p>
       <p>Sigue siendo buen esposito 🥰 te amo demasiadoooooooo con mi cuerpo, alma, mente y corazón 🥰🥰 te amo demasiadoooooooo mucho muchooo hasta el infinito 💕</p>
       <button type="button" class="dialog-close letter-close" id="close-letter">Cerrar cartita 💗</button>
+    </dialog>
+    <dialog class="letter-dialog" id="reasons-dialog" aria-labelledby="reasons-title">
+      <h2 id="reasons-title">10 razones por las que eres el mejor 💙</h2>
+      <ol class="reasons-list">
+        <li>Porque eres taaaan bueno y cariñoso conmigo jsjsj.</li>
+        <li>Porque le pones todo tu empeño a nuestra relación.</li>
+        <li>Porque haces que me sienta querida y acompañada.</li>
+        <li>Porque tu sonrisa siempre logra alegrarme el día.</li>
+        <li>Porque en tus brazos encuentro mi lugar seguro.</li>
+        <li>Porque juntos hacemos que cada día sea especial.</li>
+        <li>Porque puedo ser yo misma cuando estoy contigo.</li>
+        <li>Porque hemos construido recuerdos hermosos estos casi cuatro años.</li>
+        <li>Porque me inspiras a hacerte feliz cada día.</li>
+        <li>Porque eres mi novio, mi esposito y mi todo uwu . Te amo hasta el infinitoou.</li>
+      </ol>
+      <button type="button" class="dialog-close letter-close" id="close-reasons">Cerrar 💙</button>
     </dialog>
     <p class="song-note">Recuerda la letra de esta canción, porque sigo sintiendo lo mismo...</p>
     <div class="music-player" id="music-player">
@@ -752,6 +780,10 @@
     const letterDialog = document.getElementById('letter-dialog');
     document.getElementById('open-letter').addEventListener('click', () => letterDialog.showModal());
     document.getElementById('close-letter').addEventListener('click', () => letterDialog.close());
+
+    const reasonsDialog = document.getElementById('reasons-dialog');
+    document.getElementById('open-reasons').addEventListener('click', () => reasonsDialog.showModal());
+    document.getElementById('close-reasons').addEventListener('click', () => reasonsDialog.close());
 
     const welcomeMenu = document.getElementById('welcome-menu');
     document.getElementById('menu-yes').addEventListener('click', () => {
