@@ -414,6 +414,103 @@
       line-height: 1.5;
     }
 
+    .message-jar {
+      width: min(100%, 340px);
+      margin: 24px auto 0;
+    }
+
+    .message-jar h2 {
+      margin: 0 0 12px;
+      color: var(--accent-dark);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+    }
+
+    .jar-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      margin: 0 auto;
+      padding: 9px 16px;
+      color: var(--accent-dark);
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .jar-button:hover { transform: translateY(-3px); background: transparent; box-shadow: none; }
+
+    .jar-illustration {
+      width: 94px;
+      height: 104px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      padding-bottom: 5px;
+      filter: drop-shadow(0 7px 8px rgba(0, 107, 130, .14));
+    }
+
+    .jar-lid {
+      width: 59px;
+      height: 14px;
+      z-index: 1;
+      background: #006b82;
+      border: 2px solid #00596d;
+      border-radius: 5px 5px 3px 3px;
+    }
+
+    .jar-glass {
+      width: 78px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      margin-top: -1px;
+      background: linear-gradient(135deg, rgba(217, 241, 244, .88), rgba(142, 203, 214, .58));
+      border: 3px solid #49aabd;
+      border-radius: 12px 12px 23px 23px;
+      box-shadow: inset 5px 0 9px rgba(255, 255, 255, .65);
+      font-size: 2.25rem;
+    }
+
+    .jar-glass::after {
+      width: 8px;
+      position: absolute;
+      top: 10px;
+      bottom: 10px;
+      left: 8px;
+      content: '';
+      background: rgba(255, 255, 255, .48);
+      border-radius: 99px;
+    }
+
+    .jar-label { font-size: .9rem; font-weight: 700; }
+
+    .jar-paper {
+      margin: 14px auto 0;
+      padding: 16px 18px;
+      color: #4e6870;
+      background: #fffdf4;
+      border: 1px solid #d7d2ad;
+      border-radius: 4px 12px 5px 10px;
+      box-shadow: 0 7px 18px rgba(41, 68, 75, .11);
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.65;
+      transform-origin: top center;
+    }
+
+    .jar-paper[hidden] { display: none; }
+
+    .jar-paper.is-visible { animation: unfold-note .45s cubic-bezier(.2,.8,.2,1) both; }
+
+    @keyframes unfold-note {
+      from { opacity: 0; transform: translateY(-12px) scaleY(.35); }
+      to { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+
     .scratch-card {
       width: min(100%, 310px);
       margin: 22px auto 0;
@@ -780,6 +877,17 @@
       </div>
       <p class="forever-response" id="forever-response" aria-live="polite"></p>
     </section>
+    <section class="message-jar" aria-labelledby="jar-title">
+      <h2 id="jar-title">Un frasquito de amor 💙</h2>
+      <button type="button" class="jar-button" id="draw-note" aria-expanded="false" aria-controls="jar-note">
+        <span class="jar-illustration" aria-hidden="true">
+          <span class="jar-lid"></span>
+          <span class="jar-glass">💌</span>
+        </span>
+        <span class="jar-label">Aprieta para sacar un papelito</span>
+      </button>
+      <p class="jar-paper" id="jar-note" aria-live="polite" hidden></p>
+    </section>
     <p class="song-note">Recuerda la letra de esta canción, porque sigo sintiendo lo mismo...</p>
     <div class="music-player" id="music-player">
       <iframe
@@ -840,6 +948,30 @@
       choice.addEventListener('click', () => {
         document.getElementById('forever-response').textContent = '¡Yo también quiero estar contigo para siempre! Te amo hasta el infinito 💙';
       });
+    });
+
+    const loveNotes = [
+      'Eres mi lugar favorito, siempre y en cualquier universo. 💙',
+      'Tu sonrisa hace que cualquier día se vuelva bonito. ✨',
+      'Gracias por elegirme y cuidar tan lindo lo nuestro. 💌',
+      'En tus brazos todo se siente como estar en casa. 🫶',
+      'Te volvería a elegir una y mil veces. 💫',
+      'Mi corazón es más feliz desde que camina junto al tuyo. 💕',
+      'Qué suerte la mía de compartir la vida contigo. 🌷',
+      'Te amo hasta el infinito y de regreso. ♡'
+    ];
+    let loveNoteIndex = 0;
+
+    document.getElementById('draw-note').addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const paper = document.getElementById('jar-note');
+      paper.hidden = false;
+      paper.classList.remove('is-visible');
+      paper.textContent = loveNotes[loveNoteIndex];
+      button.setAttribute('aria-expanded', 'true');
+      button.querySelector('.jar-label').textContent = 'Sacar otro papelito 💌';
+      loveNoteIndex = (loveNoteIndex + 1) % loveNotes.length;
+      requestAnimationFrame(() => paper.classList.add('is-visible'));
     });
 
     const welcomeMenu = document.getElementById('welcome-menu');
