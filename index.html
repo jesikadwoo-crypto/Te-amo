@@ -56,6 +56,29 @@
       to { transform: translate3d(24px, 115vh, 0) rotate(300deg); }
     }
 
+    .celebration-confetti {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .celebration-confetti span {
+      position: absolute;
+      top: -30px;
+      left: var(--x);
+      color: var(--color);
+      font-size: var(--size);
+      opacity: 0;
+      animation: celebration-fall var(--duration) var(--delay) ease-in forwards;
+    }
+
+    @keyframes celebration-fall {
+      0% { opacity: 1; transform: translate3d(0, -5vh, 0) rotate(0); }
+      100% { opacity: 0; transform: translate3d(var(--drift), 110vh, 0) rotate(var(--rotation)); }
+    }
+
     .card {
       width: min(100%, 570px);
       position: relative;
@@ -554,6 +577,7 @@
     <span style="--x:79%;--size:14px;--time:16s;--delay:-2s">♥</span>
     <span style="--x:92%;--size:22px;--time:19s;--delay:-11s">♡</span>
   </div>
+  <div class="celebration-confetti" id="celebration-confetti" aria-hidden="true"></div>
 
   <section class="welcome-menu" id="welcome-menu" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
     <div class="welcome-panel">
@@ -665,6 +689,25 @@
 
     const welcomeMenu = document.getElementById('welcome-menu');
     document.getElementById('menu-yes').addEventListener('click', () => {
+      const confetti = document.getElementById('celebration-confetti');
+      const symbols = ['♥', '♡', '✦', '✿', '●'];
+      const colors = ['#0090AE', '#39aec2', '#8ecbd6', '#f1c75b', '#ffffff'];
+
+      confetti.replaceChildren();
+      for (let index = 0; index < 65; index += 1) {
+        const piece = document.createElement('span');
+        piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        piece.style.setProperty('--x', `${Math.random() * 100}%`);
+        piece.style.setProperty('--size', `${12 + Math.random() * 18}px`);
+        piece.style.setProperty('--duration', `${2.4 + Math.random() * 1.8}s`);
+        piece.style.setProperty('--delay', `${Math.random() * 0.7}s`);
+        piece.style.setProperty('--drift', `${Math.random() * 180 - 90}px`);
+        piece.style.setProperty('--rotation', `${Math.random() * 900 - 450}deg`);
+        piece.style.setProperty('--color', colors[Math.floor(Math.random() * colors.length)]);
+        confetti.appendChild(piece);
+      }
+
+      window.setTimeout(() => confetti.replaceChildren(), 5000);
       welcomeMenu.hidden = true;
     });
 
