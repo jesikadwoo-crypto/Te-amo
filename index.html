@@ -371,6 +371,49 @@
 
     .card > .letter-button { min-height: 126px; }
 
+    .forever-question {
+      width: min(100%, 380px);
+      margin: 26px auto 0;
+      padding: 20px 18px;
+      background: #f2fafb;
+      border: 1px solid #c6e6eb;
+      border-radius: 18px;
+    }
+
+    .forever-question h2 {
+      margin: 0;
+      color: var(--accent-dark);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.28rem;
+      line-height: 1.4;
+    }
+
+    .forever-choices { display: grid; gap: 9px; margin-top: 15px; }
+
+    .forever-choice {
+      width: 100%;
+      min-height: 48px;
+      margin: 0;
+      padding: 10px 14px;
+    }
+
+    .forever-choice-secondary {
+      color: var(--accent-dark);
+      background: #eaf7f9;
+      border: 1px solid #8dcbd6;
+      box-shadow: none;
+    }
+
+    .forever-choice-secondary:hover { background: #d8f0f4; box-shadow: 0 8px 16px rgba(0, 144, 174, .14); }
+
+    .forever-response {
+      min-height: 1.5em;
+      margin: 12px 0 0;
+      color: var(--accent-dark);
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
     .scratch-card {
       width: min(100%, 310px);
       margin: 22px auto 0;
@@ -729,6 +772,14 @@
       </ol>
       <button type="button" class="dialog-close letter-close" id="close-reasons">Cerrar 💙</button>
     </dialog>
+    <section class="forever-question" aria-labelledby="forever-question-title">
+      <h2 id="forever-question-title">¿Quieres ser mi novio para siempre?</h2>
+      <div class="forever-choices">
+        <button type="button" class="forever-choice" data-response="yes">Sí 💙</button>
+        <button type="button" class="forever-choice forever-choice-secondary" data-response="of-course">Sí, por supuesto 💞</button>
+      </div>
+      <p class="forever-response" id="forever-response" aria-live="polite"></p>
+    </section>
     <p class="song-note">Recuerda la letra de esta canción, porque sigo sintiendo lo mismo...</p>
     <div class="music-player" id="music-player">
       <iframe
@@ -784,6 +835,12 @@
     const reasonsDialog = document.getElementById('reasons-dialog');
     document.getElementById('open-reasons').addEventListener('click', () => reasonsDialog.showModal());
     document.getElementById('close-reasons').addEventListener('click', () => reasonsDialog.close());
+
+    document.querySelectorAll('.forever-choice').forEach((choice) => {
+      choice.addEventListener('click', () => {
+        document.getElementById('forever-response').textContent = '¡Yo también quiero estar contigo para siempre! Te amo hasta el infinito 💙';
+      });
+    });
 
     const welcomeMenu = document.getElementById('welcome-menu');
     document.getElementById('menu-yes').addEventListener('click', () => {
