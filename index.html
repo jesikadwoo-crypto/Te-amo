@@ -309,6 +309,102 @@
       font: inherit;
     }
 
+    .letter-button {
+      width: 190px;
+      min-height: 126px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      margin: 18px auto 0;
+      padding: 12px;
+      color: #a74462;
+      background: linear-gradient(155deg, #fff9f7, #ffeaf0);
+      border: 2px solid #efc4cf;
+      border-radius: 16px 16px 13px 13px;
+      box-shadow: 0 7px 16px rgba(215, 104, 134, .16);
+      font-size: .88rem;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .letter-button:hover { transform: translateY(-3px) rotate(-2deg); box-shadow: 0 11px 20px rgba(215, 104, 134, .23); }
+
+    .card > #surprise-button,
+    .card > .gift-coupon,
+    .card > .letter-button {
+      width: min(100%, 310px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 18px auto 0;
+      text-align: center;
+    }
+
+    .card > #surprise-button,
+    .card > .gift-coupon { min-height: 54px; }
+
+    .card > .letter-button { min-height: 126px; }
+
+    .envelope-icon {
+      width: 67px;
+      height: 47px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      color: #c95778;
+      background: #ffdfe7;
+      border: 1px solid #e99caf;
+      border-radius: 7px;
+      font-size: 1.35rem;
+    }
+
+    .envelope-icon::before {
+      position: absolute;
+      inset: 0 0 auto;
+      height: 55%;
+      content: '';
+      background: #f6c5d0;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+
+    .envelope-icon span {
+      position: relative;
+      z-index: 1;
+      margin-top: 9px;
+    }
+
+    .letter-dialog {
+      width: min(92vw, 520px);
+      max-height: min(82vh, 720px);
+      overflow-y: auto;
+      padding: clamp(24px, 6vw, 38px);
+      color: #755b67;
+      background: #fffaf8;
+      border: 1px solid #f7dce2;
+      border-radius: 24px;
+      box-shadow: 0 24px 70px rgba(83, 47, 63, .25);
+      line-height: 1.8;
+    }
+
+    .letter-dialog::backdrop { background: rgba(76, 48, 61, .48); backdrop-filter: blur(4px); }
+
+    .letter-dialog h2 {
+      margin: 0 0 18px;
+      color: #593e4d;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.9rem;
+      text-align: center;
+    }
+
+    .letter-dialog p { margin: 0 0 15px; }
+
+    .letter-dialog .letter-close {
+      display: block;
+      margin: 20px auto 0;
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
@@ -353,6 +449,10 @@
     <button type="button" id="surprise-button">Abrir un mensajito 💝</button>
     <p class="signature">Hecho con mucho <span>♥</span>, para ti</p>
     <button type="button" class="gift-coupon">🎟️ escoje tu proximo regalo 🎁</button>
+    <button type="button" class="letter-button" id="open-letter">
+      <span class="envelope-icon" aria-hidden="true"><span>♥</span></span>
+      <span>Abrir mi cartita 💌</span>
+    </button>
     <dialog class="gift-dialog" id="gift-dialog" aria-labelledby="gift-dialog-title">
       <h2 id="gift-dialog-title">Escoge tu regalito 💝</h2>
       <p>Elige el que más te guste:</p>
@@ -363,6 +463,14 @@
       </div>
       <p class="gift-choice-message" id="gift-choice-message" aria-live="polite"></p>
       <button type="button" class="dialog-close" id="dialog-close">Cerrar</button>
+    </dialog>
+    <dialog class="letter-dialog" id="letter-dialog" aria-labelledby="letter-title">
+      <h2 id="letter-title">Una cartita para ti 💌</h2>
+      <p>Cielito lindo 🥺🥰 hoy es un día especial porque se celebra el día del novio y ese eres tú. Mi novio, mi esposo y mi todo.</p>
+      <p>Quiero agradecerte por ser tan bueno conmigo y ponerle todo tu empeño y dedicación a esta linda relación, gracias a eso ya casi cumplimos cuatro añotes y estoy muy feliz por eso ♡.</p>
+      <p>Quiero hacerte muy muy feliz cada día que estemos juntos 🥰 quiero sacarte una linda sonrisa como lo es la tuya, quiero volar entre tus brazos y sentirme protegida por siempre 🥺.</p>
+      <p>Sigue siendo buen esposito 🥰 te amo demasiadoooooooo con mi cuerpo, alma, mente y corazón 🥰🥰 te amo demasiadoooooooo mucho muchooo hasta el infinito 💕</p>
+      <button type="button" class="dialog-close letter-close" id="close-letter">Cerrar cartita 💗</button>
     </dialog>
     <span class="sr-only" id="announcement" aria-live="polite"></span>
   </main>
@@ -402,6 +510,10 @@
     });
 
     document.getElementById('dialog-close').addEventListener('click', () => giftDialog.close());
+
+    const letterDialog = document.getElementById('letter-dialog');
+    document.getElementById('open-letter').addEventListener('click', () => letterDialog.showModal());
+    document.getElementById('close-letter').addEventListener('click', () => letterDialog.close());
 
     const couplePhoto = document.getElementById('couple-photo');
     const photoPlaceholder = document.getElementById('photo-placeholder');
